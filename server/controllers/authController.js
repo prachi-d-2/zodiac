@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');  // Ensure User model exists
 
 // Register a new user
-const register = async (req, res) => {
+router.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
@@ -31,10 +31,10 @@ const register = async (req, res) => {
   } catch (error) {
     res.status(500).send('Server error');
   }
-};
+});
 
 // Login an existing user
-const login = async (req, res) => {
+router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -54,11 +54,11 @@ const login = async (req, res) => {
   } catch (error) {
     res.status(500).send('Server error');
   }
-};
+});
 
 // Logout a user (optional, if you want to handle frontend logout)
-const logout = (req, res) => {
+router.post('/logout', (req, res) => {
   res.json({ message: 'Logged out successfully' });
-};
+});
 
-module.exports = { register, login, logout };
+module.exports = router;
