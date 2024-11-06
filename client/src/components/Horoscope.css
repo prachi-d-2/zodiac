@@ -1,0 +1,13 @@
+.horoscope {
+    background-color: #1a1a2e;
+    padding: 20px;
+    border-radius: 8px;
+    color: #ffffff;
+  }
+  
+  .horoscope p {
+    font-size: 18px;
+    line-height: 1.5;
+    color: #ffffff;
+  }
+  

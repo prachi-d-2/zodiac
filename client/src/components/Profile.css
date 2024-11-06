@@ -1,0 +1,23 @@
+.profile {
+    background-color: #1a1a2e;
+    padding: 20px;
+    border-radius: 8px;
+    color: #ffffff;
+  }
+  
+  .profile input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+  }
+  
+  .profile button {
+    background-color: #ff4b5c;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    margin-top: 10px;
+    width: 100%;
+  }
+  

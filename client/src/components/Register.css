@@ -1,0 +1,23 @@
+.register-form {
+    background-color: #1a1a2e;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    margin: 0 auto;
+    color: #fff;
+  }
+  
+  .register-form input {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+  }
+  
+  .register-form button {
+    background-color: #ff4b5c;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+  }
+  

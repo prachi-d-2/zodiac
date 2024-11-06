@@ -1,0 +1,32 @@
+.navbar {
+    background-color: #1a1a2e;
+    color: #ffffff;
+    padding: 10px;
+  }
+  
+  .menu-button {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 24px;
+  }
+  
+  .nav-links {
+    display: none;
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .nav-links.show {
+    display: block;
+  }
+  
+  .nav-links li {
+    margin: 10px 0;
+  }
+  
+  .nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+  }
+  
