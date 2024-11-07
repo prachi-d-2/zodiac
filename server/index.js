@@ -1,40 +1,41 @@
-// Import dependencies
 const express = require('express');
-const cors = require('cors');
-const mongoose = require('mongoose');
-const horoscopeRoutes = require('./routes/horoscopeRoutes'); // Import the horoscope routes
+const axios = require('axios');
+const router = express.Router();
 
-const app = express();
+// Endpoint to fetch horoscope based on zodiac sign and time period (today, week, month, or year)
+router.get('/:timePeriod/:sign', async (req, res) => {
+  const zodiacSign = req.params.sign.toLowerCase();  // Make the sign lowercase for consistency
+  const timePeriod = req.params.timePeriod.toLowerCase(); // 'today', 'week', 'month', or 'year'
 
-// MongoDB Connection
-const connectDB = async () => {
-  try {
-    // Replace <db-uri> with your MongoDB URI
-    await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost/zodiac-connect', {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log('MongoDB connected successfully');
-  } catch (err) {
-    console.error('Error connecting to MongoDB:', err);
-    process.exit(1); // Stop the server if MongoDB connection fails
+  // Valid time periods as per the API documentation
+  const validTimePeriods = ['today', 'week', 'month', 'year'];
+  
+  if (!validTimePeriods.includes(timePeriod)) {
+    return res.status(400).json({ error: 'Invalid time period. Please use today, week, month, or year.' });
   }
-};
 
-// Call the MongoDB connection function
-connectDB();
+  try {
+    const response = await axios.get(
+        `https://horoscope-api.herokuapp.com/horoscope/today/${zodiacSign}`,
+        {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      
+    // Check and log the response data
+    if (!response || !response.data) {
+      throw new Error('Empty response data');
+    }
 
-// Middlewares
-app.use(cors());
-app.use(express.json()); // for parsing application/json
-
-// Define Routes
-app.use('/api/horoscope', horoscopeRoutes);  // Integrate the horoscope route
-const authController = require('./controllers/authController');
-app.use('/api/auth', authController); // Or another appropriate path
-
-
-// Start the server
-app.listen(5000, () => {
-  console.log('Server is running on port 5000');
+    // Send the horoscope data back to the client
+    res.json(response.data);
+  } catch (error) {
+    console.error('Error fetching horoscope:', error.message);
+    res.status(500).json({ error: 'Failed to fetch horoscope data', details: error.message });
+  }
 });
+
+module.exports = router;
