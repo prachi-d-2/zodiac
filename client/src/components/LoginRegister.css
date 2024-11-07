@@ -1,0 +1,58 @@
+.login-register-container {
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 20px;
+    background-color: var(--background-color); /* white */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .login-register-container h2 {
+    margin-bottom: 20px;
+    color: var(--text-color); /* red */
+  }
+  
+  .login-register-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .login-register-container input {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid var(--secondary-color); /* light gray */
+    border-radius: 5px;
+  }
+  
+  .login-register-container button {
+    padding: 10px;
+    background-color: var(--primary-color); /* dark blue */
+    border: none;
+    border-radius: 5px;
+    color: var(--background-color); /* white */
+    cursor: pointer;
+  }
+  
+  .login-register-container button:hover {
+    background-color: var(--accent-color); /* lighter blue */
+  }
+  
+  .error-message {
+    color: var(--text-color); /* red */
+    margin-bottom: 10px;
+  }
+  
+  .toggle-container {
+    margin-top: 10px;
+  }
+  
+  .toggle-container p {
+    color: var(--secondary-color); /* dark gray */
+  }
+  
+  .toggle-container span {
+    color: var(--primary-color); /* dark blue */
+    cursor: pointer;
+  }
+  

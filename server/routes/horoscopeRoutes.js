@@ -1,28 +1,11 @@
 const express = require('express');
-const axios = require('axios');
 const router = express.Router();
+const horoscopeController = require('../controllers/horoscopeController');
 
-// Endpoint to fetch daily horoscope based on zodiac sign
-router.get('/:sign/:day', async (req, res) => {
-  const zodiacSign = req.params.sign;
-  const day = req.params.day; // 'today', 'yesterday', or 'tomorrow'
+// Endpoint to fetch horoscope based on time period (today, week, month, or year)
+router.get('/:timePeriod/:sign', horoscopeController.getHoroscopeByTimePeriod);
 
-  try {
-    const response = await axios.get(
-      `https://horoscope-api.herokuapp.com/horoscope/${zodiacSign}/${day}`
-    );
-
-    // Check and log the response data
-    if (!response || !response.data) {
-      throw new Error('Empty response data');
-    }
-
-    // Send the horoscope data back to the client
-    res.json(response.data);
-  } catch (error) {
-    console.error('Error fetching horoscope:', error.message);
-    res.status(500).json({ error: 'Failed to fetch horoscope data', details: error.message });
-  }
-});
+// Endpoint to fetch daily horoscope based on day (today, yesterday, tomorrow)
+router.get('/:sign/:day', horoscopeController.getDailyHoroscope);
 
 module.exports = router;

@@ -1,4 +1,18 @@
+const multer = require('multer');
+const path = require('path');
 const User = require('../models/User');
+
+// Configure storage for multer
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  }
+});
+
+const upload = multer({ storage });
 
 // Get profile
 const getProfile = async (req, res) => {
@@ -12,13 +26,16 @@ const getProfile = async (req, res) => {
 
 // Update profile
 const updateProfile = async (req, res) => {
-  const { username, email, avatar } = req.body;
+  const { username, email, zodiacSign, bio } = req.body;
+  const avatar = req.file ? `/uploads/${req.file.filename}` : req.body.avatar;
 
   try {
     const user = await User.findById(req.user.id);
 
     user.username = username || user.username;
     user.email = email || user.email;
+    user.zodiacSign = zodiacSign || user.zodiacSign;
+    user.bio = bio || user.bio;
     user.avatar = avatar || user.avatar;
 
     await user.save();
@@ -29,4 +46,4 @@ const updateProfile = async (req, res) => {
   }
 };
 
-module.exports = { getProfile, updateProfile };
+module.exports = { getProfile, updateProfile, upload };
