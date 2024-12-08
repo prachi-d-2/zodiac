@@ -1,0 +1,22 @@
+.parallax-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: var(--primary-bg);
+  }
+  
+  .layer {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background-image: url('/path-to-zodiac-symbols.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    transform: translateZ(-1px) scale(2);
+  }
+  
+  .stars {
+    background-image: url('/path-to-stars-overlay.png');
+  }
+  
